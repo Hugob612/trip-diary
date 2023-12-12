@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Travel {
+  id             Int          @id @default(autoincrement())
+  date           DateTime
+  destiny        String
+  acommodation   Acommodation @relation(fields: [idAcommodation], references: [id])
+  idAcommodation Int
+  Transport      Transport    @relation(fields: [idTransport], references: [id])
+  idTransport    Int
+  Route          Route?       @relation(fields: [routeId], references: [id])
+  routeId        Int?
+  finance        finance?     @relation(fields: [financeId], references: [id])
+  financeId      Int?
+  recommendation String
+  avaluation     String
+  notes          String
+
+  @@map(name: "travels")
+}
+
+model Acommodation {
+  id      Int      @id @default(autoincrement())
+  name    String
+  reserva DateTime
+  address String
+  phone   String
+  travels Travel[]
+
+  @@map(name: "acommodations")
+}
+
+model Transport {
+  id      Int      @id @default(autoincrement())
+  data    DateTime
+  origin  String
+  destiny String
+  travels Travel[]
+
+  @@map(name: "transports")
+}
+
+model Route {
+  id       Int      @id @default(autoincrement())
+  places   String
+  food     String
+  todo     String
+  shopping String
+  travels  Travel[]
+}
+
+model finance {
+  id      Int      @id @default(autoincrement())
+  expense String
+  value   Float
+  travels Travel[]
+}
