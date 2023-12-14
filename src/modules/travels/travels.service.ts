@@ -16,18 +16,18 @@ export class TravelsService {
       },
     });
 
-    if (travelExists) {
-      throw new Error('Travel already exists');
-    }
+    if (travelExists) throw new Error('Travel already exists');
 
     const travel = await this.prisma.travel.create({
       data,
     });
 
     return travel;
+  }
 
-    async findAll() {
-      return this.prisma.travel.findMany();
-    }
+  async findAllTravels() {
+    const travels = await this.prisma.travel.findMany();
+
+    return travels;
   }
 }

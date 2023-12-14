@@ -1,7 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Get, Controller, Post } from '@nestjs/common';
 import { TravelsService } from './travels.service';
 import { TravelDTO } from './travel.dto';
-import { get } from 'http';
 
 @Controller('travels')
 export class TravelsController {
