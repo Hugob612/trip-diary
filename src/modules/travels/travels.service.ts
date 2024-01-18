@@ -1,27 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/PrismaService';
+import { Prisma } from '@prisma/client';
 import { TravelDTO } from './travel.dto';
+import { PrismaService } from 'src/database/PrismaService';
 
 @Injectable()
-export class TravelsService {
-  constructor(private prisma: PrismaService) {}
+export class TravelService {
+  contructor( private prisma: PrismaService) {}
 
   async create(data: TravelDTO) {
-
-    const travelExists = await this.prisma.travel.findFirst({
-        where: {
-            id: data.id
-        }
-    })
-
-    if (travelExists) {
-        throw new Error('Travel already exists')
-    }
-
-    const travel = await this.prisma.travel.create({
-      data,
-    });
-
-    return travel;
-  }
+    this.prisma}
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Get, Controller, Post } from '@nestjs/common';
 import { TravelsService } from './travels.service';
 import { TravelDTO } from './travel.dto';
 
@@ -9,5 +9,9 @@ export class TravelsController {
   @Post()
   async create(@Body() data: TravelDTO) {
     return this.travelsService.create(data);
+  }
+  @Get()
+  async findAll() {
+    return this.travelsService.findAll();
   }
 }
