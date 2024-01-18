@@ -9,6 +9,7 @@ datasource db {
 
 model Travel {
   id             Int          @id @default(autoincrement())
+  bar_code       String
   date           DateTime
   destiny        String
   acommodation   Acommodation @relation(fields: [idAcommodation], references: [id])
