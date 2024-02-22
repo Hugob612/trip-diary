@@ -4,7 +4,8 @@ import { PrismaService } from 'src/database/PrismaService';
 
 @Injectable()
 export class TravelService {
-  constructor(private prisma: PrismaService) { }
+  [x: string]: any;
+  constructor(private prisma: PrismaService) {}
 
   async create(data: TravelDTO) {
     const travelExists = await this.prisma.travel.findFirst({
@@ -31,12 +32,12 @@ export class TravelService {
       where: { id },
       data,
     });
-    
+
     if (!travelExists) {
       throw new Error('Travel not found');
     }
 
-   return await this.prisma.travel.update({
+    return await this.prisma.travel.delete({
       data,
       where: { id },
     });
