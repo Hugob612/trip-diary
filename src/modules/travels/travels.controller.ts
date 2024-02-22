@@ -1,10 +1,10 @@
-import { Body, Get, Controller, Post } from '@nestjs/common';
-import { TravelsService } from './travels.service';
+import { Body, Get, Controller, Post, Put, Param } from '@nestjs/common';
+import { TravelService } from './travels.service';
 import { TravelDTO } from './travel.dto';
 
 @Controller('travels')
 export class TravelsController {
-  constructor(private readonly travelsService: TravelsService) {}
+  constructor(private readonly travelsService: TravelService) {}
 
   @Post()
   async create(@Body() data: TravelDTO) {
@@ -14,4 +14,11 @@ export class TravelsController {
   async findAll() {
     return this.travelsService.findAll();
   }
+
+  @Put(":id")
+  async update(@Param("id") id: string, @Body() data: TravelDTO) {
+   return this.travelsService.update(id, data);
+ }
 }
+
+
