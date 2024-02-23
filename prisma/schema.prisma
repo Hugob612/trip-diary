@@ -9,21 +9,15 @@ datasource db {
 
 model Travel {
   id             Int          @id @default(autoincrement())
-  bar_code       String
   date           DateTime
   destiny        String
-  acommodation   Acommodation @relation(fields: [idAcommodation], references: [id])
-  idAcommodation Int
-  Transport      Transport    @relation(fields: [idTransport], references: [id])
-  idTransport    Int
-  Route          Route?       @relation(fields: [routeId], references: [id])
-  routeId        Int?
-  finance        finance?     @relation(fields: [financeId], references: [id])
-  financeId      Int?
   recommendation String
   avaluation     String
   notes          String
-
+  acommodations  Acommodation[]
+  transports     Transport[]
+  routes         Route[]
+  finances       Finance[]
   @@map(name: "travels")
 }
 
@@ -33,7 +27,8 @@ model Acommodation {
   reserva DateTime
   address String
   phone   String
-  travels Travel[]
+  travel Travel @relation(fields: [travelId], references: [id])
+  travelId Int
 
   @@map(name: "acommodations")
 }
@@ -43,7 +38,8 @@ model Transport {
   data    DateTime
   origin  String
   destiny String
-  travels Travel[]
+  travel Travel @relation(fields: [travelId], references: [id])
+  travelId Int
 
   @@map(name: "transports")
 }
@@ -54,12 +50,14 @@ model Route {
   food     String
   todo     String
   shopping String
-  travels  Travel[]
+  travel  Travel @relation(fields: [travelId], references: [id])
+  travelId Int
 }
 
-model finance {
+model Finance {
   id      Int      @id @default(autoincrement())
   expense String
   value   Float
-  travels Travel[]
+  travel Travel @relation(fields: [travelId], references: [id])
+  travelId Int
 }
