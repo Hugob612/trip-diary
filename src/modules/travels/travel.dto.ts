@@ -1,11 +1,7 @@
 export type TravelDTO = {
-  id: any;
-  date: Date | string;
+  id: number;
+  date: Date;
   destiny: string;
-  acommodation: string;
-  transport: string;
-  route: string;
-  finance: string;
   recommendation: string;
   avaluation: string;
   notes: string;

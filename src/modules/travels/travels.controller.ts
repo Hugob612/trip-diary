@@ -24,12 +24,12 @@ export class TravelsController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() data: TravelDTO) {
+  async update(@Param('id') id: number, @Body() data: TravelDTO) {
     return this.travelsService.update(id, data);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
     return this.travelsService.delete(id);
   }
 }
